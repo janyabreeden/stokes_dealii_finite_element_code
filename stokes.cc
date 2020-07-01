@@ -49,9 +49,7 @@ class StokesProblem
       void setup_dofs ();
       void refine_grid();
       void assemble_stokes_system ();
-      void assemble_navier_stokes_system ();
       void stokes_solve ();
-      void navier_stokes_solve ();
       void solution_update ();
       void setup_convergence_table();
       void output_results (const unsigned int cycle);
@@ -105,4 +103,15 @@ void StokesProblem<dim>::refine_grid()
             << "============================================================"
             << std::endl;
 // >>>>>>> master
+}
+
+template<int dim>
+void StokesProblem<dim>::stokes_solve()
+{
+  SparseDirectUMFPACK  A_direct;
+  A_direct.initialize(system_matrix);
+
+  A_direct.vmult (solution, system_rhs);
+
+  //solution = 0;  // testing Nav-Stokes with initial guess of zero
 }
