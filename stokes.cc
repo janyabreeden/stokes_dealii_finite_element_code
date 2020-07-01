@@ -75,6 +75,17 @@ class StokesProblem
       ConstraintMatrix        zero_press_node_constraint;
 };
 
+// <<<<<<< Constructor
+
+template<int dim>
+StokesProblem<dim>::StokesProblem(const unsigned int degree)
+    :
+    degree(degree),
+    fe(FE_Q<dim>(degree+1), dim,
+    FE_Q<dim>(degree), 1), 
+    dof_handler(triangulation)
+    {}
+
 template<int dim>
 void StokesProblem<dim>::refine_grid()
 {
@@ -93,4 +104,5 @@ void StokesProblem<dim>::refine_grid()
             << std::endl
             << "============================================================"
             << std::endl;
+// >>>>>>> master
 }
